@@ -1,0 +1,17 @@
+---
+  - name: Installation du web webserver
+    remote_user: pi
+    hosts: webserver
+    tasks:
+    - name: Installation des packages
+      become: yes
+      apt: name= {{ item }}  update_cache=yes state=latest
+      with_items:
+        - git
+        - vim-nox
+        - zsh
+        - fonts-powerline
+        - postgresql
+        - php
+        - apache2
+        - htop
