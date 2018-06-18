@@ -1,6 +1,6 @@
 ---
   - name: Installation du web webserver
-    remote_user: pi
+    remote_user: "{{ user }}"
     hosts: webserver
     tasks:
     - name: Installation des packages
