@@ -1,11 +1,3 @@
-
-
-
-
-
-
-
-
 ## Web Server setup.
 
 ### Requirements:
