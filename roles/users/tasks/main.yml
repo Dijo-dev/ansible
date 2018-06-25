@@ -1,0 +1,14 @@
+---
+  - name: Creation
+    become: yes
+    user: name="{{ user }}" shell=/usr/bin/zsh
+    When: user is defined
+
+  - name: Add ssh Key
+    become: yes
+    authorized_key:
+      user: "{{ user }}"
+      key: "{{ lookup('file', '~/.ssh/{{ ssh_key_name }}') }}"
+    When:
+      - user is defined
+      - ssh_key_name is defined

@@ -1,17 +1,8 @@
 ---
   - name: Installation du web webserver
-    remote_user: "{{ user }}"
+    remote_user: "{{ remote_user }}"
     hosts: webserver
-    tasks:
-    - name: Installation des packages
-      become: yes
-      apt: name= {{ item }}  update_cache=yes state=latest
-      with_items:
-        - git
-        - vim-nox
-        - zsh
-        - fonts-powerline
-        - postgresql
-        - php
-        - apache2
-        - htop
+
+    roles:
+      - role: users
+...
