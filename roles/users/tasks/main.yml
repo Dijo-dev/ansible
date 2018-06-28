@@ -1,14 +1,21 @@
 ---
   - name: Creation
     become: yes
-    user: name="{{ user }}" shell=/usr/bin/zsh
+    user:
+      name: "{{ user }}"
+      shell: /bin/bash
+      create_home: false
+      state: present
     When: user is defined
 
   - name: Add ssh Key
     become: yes
     authorized_key:
       user: "{{ user }}"
-      key: "{{ lookup('file', '~/.ssh/{{ ssh_key_name }}') }}"
+      key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/{{ ssh_key_name }}') }}"
+      manage_dir: false
+      path: "/etc/ssh/authorized_keys/{{ user }}/authorized_key"
+      state: present
     When:
       - user is defined
       - ssh_key_name is defined
